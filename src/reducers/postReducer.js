@@ -1,8 +1,9 @@
-import { FETCH_POSTS, DELETE_POST } from '../actions/types';
+import { FETCH_POSTS, SELECT_POST, DELETE_POST } from '../actions/types';
 
 const initialState = {
   posts: [],
   after: '',
+  selectedPostId: '',
 };
 
 export default function(state = initialState, action) {
@@ -12,6 +13,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         ...data,
+      };
+    case SELECT_POST:
+      return {
+        ...state,
+        selectedPostId: action.payload,
       };
 
     default:

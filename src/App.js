@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { Layout } from 'antd';
 
 import Posts from './components/Posts';
+import PostDetail from './components/PostDetail';
 import logo from './images/logo.png';
 
 import store from './store';
@@ -26,7 +27,9 @@ function App() {
             <Sider width={300} theme="light" className="sidebar-section">
               <Posts />
             </Sider>
-            <Content className="main-content">Content</Content>
+            <Content className="main-content">
+              <PostDetail />
+            </Content>
           </Layout>
           <Footer>©2019 David Ortega</Footer>
         </Layout>

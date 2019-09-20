@@ -1,3 +1,5 @@
+/* Header  */
+
 .header-section {
   display: flex;
   align-items: center;
@@ -6,8 +8,14 @@
   margin-left: 10px;
   color: #fff;
 }
+
+/* Sidebar  */
 .ant-list-vertical .ant-list-item {
   padding: 16px;
+}
+
+.ant-list-vertical .ant-list-item-meta-title {
+  margin-bottom: 0;
 }
 
 .ant-list-vertical .ant-list-item-extra {
@@ -23,4 +31,36 @@
 .dismiss-button {
   text-align: center;
   font-weight: 700;
+  padding: 10px;
+}
+
+.demo-infinite-container {
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: auto;
+  height: 80vh;
+}
+.demo-loading-container {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Content */
+
+.content-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Footer */
+
+.ant-layout-footer {
+  padding: 24px 50px;
+  color: #fff;
+  font-size: 14px;
+  background: #001529;
 }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_POSTS, DELETE_POST } from './types';
+import { FETCH_POSTS, SELECT_POST, DELETE_POST } from './types';
 import { compose, map, path } from 'ramda';
 import postsFormatter from '../utils/posts-formatter';
 
@@ -26,5 +26,16 @@ export const fetchPosts = after => dispatch => {
       type: FETCH_POSTS,
       payload,
     });
+  });
+};
+
+// Select Post
+
+export const selectPost = postId => dispatch => {
+  const payload = postId;
+
+  return dispatch({
+    type: SELECT_POST,
+    payload,
   });
 };
