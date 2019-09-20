@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPosts, selectPost } from '../actions/postActions';
+import {
+  fetchPosts,
+  selectPost,
+  deletePost,
+  deleteAllPost,
+} from '../actions/postActions';
 import Moment from 'react-moment';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -56,7 +61,9 @@ class Posts extends Component {
                       active={!item.unread}
                       key="list-vertical-eye"
                     />,
-                    <IconText type="delete" key="list-vertical-delete" />,
+                    <div onClick={() => this.props.deletePost(item.id)}>
+                      <IconText type="delete" key="list-vertical-delete" />
+                    </div>,
                   ]}
                   extra={
                     item.thumbnail !== 'self' && (
@@ -69,16 +76,24 @@ class Posts extends Component {
                     title={item.author}
                     description={<Moment fromNow>{item.createdDate}</Moment>}
                   />
-                  <a onClick={() => this.props.selectPost(item.id)}>
+                  <div
+                    className="list-link-style"
+                    onClick={() => this.props.selectPost(item.id)}
+                  >
                     {item.title}
-                  </a>
+                  </div>
                 </List.Item>
               )}
             />
           </InfiniteScroll>
         </div>
         {listData.length > 0 && (
-          <div className="dismiss-button">Dismiss All</div>
+          <div
+            className="dismiss-button list-link-style"
+            onClick={() => this.props.deleteAllPost()}
+          >
+            Dismiss All
+          </div>
         )}
       </div>
     );
@@ -88,6 +103,8 @@ class Posts extends Component {
 Posts.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
   selectPost: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+  deleteAllPost: PropTypes.func.isRequired,
   entries: PropTypes.shape({
     posts: PropTypes.array.isRequired,
     after: PropTypes.string.isRequired,
@@ -101,6 +118,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   fetchPosts,
   selectPost,
+  deletePost,
+  deleteAllPost,
 };
 
 export default connect(

@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { FETCH_POSTS, SELECT_POST, DELETE_POST } from './types';
+import {
+  FETCH_POSTS,
+  SELECT_POST,
+  DELETE_POST,
+  DELETE_ALL_POSTS,
+} from './types';
 import { compose, map, path } from 'ramda';
 import postsFormatter from '../utils/posts-formatter';
 
@@ -39,3 +44,21 @@ export const selectPost = postId => dispatch => {
     payload,
   });
 };
+
+// Delete Post
+
+export const deletePost = postId => dispatch => {
+  const payload = postId;
+
+  return dispatch({
+    type: DELETE_POST,
+    payload,
+  });
+};
+
+// Delete all Posts
+
+export const deleteAllPost = () => dispatch =>
+  dispatch({
+    type: DELETE_ALL_POSTS,
+  });
