@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Card, Icon, Avatar } from 'antd';
+import { deletePost } from '../actions/postActions';
 
 import avatarImage from '../images/avatar.png';
 
@@ -21,8 +22,12 @@ class PostDetail extends Component {
     return (
       <div className="content-section">
         <Card
-          style={{ width: '50%' }}
-          cover={<img alt="thumbnail" src={post.thumbnail} />}
+          style={{ width: '100%' }}
+          cover={
+            post.thumbnail.indexOf('thumbs') > 1 && (
+              <img alt="thumbnail" src={post.thumbnail} />
+            )
+          }
           actions={[
             <div>
               <Icon type="message" key="message" /> {post.comments}
@@ -32,7 +37,9 @@ class PostDetail extends Component {
               key="eye"
               style={{ color: !post.unread ? '#1890ff' : '' }}
             />,
-            <Icon type="delete" key="delete" />,
+            <div onClick={() => this.props.deletePost(post.id)}>
+              <Icon type="delete" key="delete" />,
+            </div>,
           ]}
         >
           <Meta
@@ -48,6 +55,7 @@ class PostDetail extends Component {
 
 PostDetail.propTypes = {
   post: PropTypes.object,
+  deletePost: PropTypes.func.isRequired,
 };
 
 PostDetail.defaultProps = {
@@ -66,5 +74,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  { deletePost }
 )(PostDetail);

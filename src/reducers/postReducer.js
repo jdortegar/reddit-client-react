@@ -15,9 +15,15 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_POSTS:
       const data = action.payload;
+
+      const newObject = {
+        after: data.after,
+        posts: [...state.posts, ...data.posts],
+      };
+
       return {
         ...state,
-        ...data,
+        ...newObject,
       };
     case SELECT_POST:
       const selectedPostId = action.payload;

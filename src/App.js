@@ -19,12 +19,27 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <Layout>
-          <Header className="header-section">
-            <img src={logo} alt="SpaceX" style={{ width: 50 }} />
+          <Header
+            className="header-section"
+            style={{ position: 'fixed', zIndex: 1, width: '100%' }}
+          >
+            <img src={logo} alt="Reddit" style={{ width: 50 }} />
             <h4>Reddit Simple Client</h4>
           </Header>
           <Layout>
-            <Sider width={300} theme="light" className="sidebar-section">
+            <Sider
+              width="50%"
+              theme="light"
+              className="sidebar-section"
+              breakpoint="lg"
+              collapsedWidth="0"
+              onBreakpoint={broken => {
+                console.log(broken);
+              }}
+              onCollapse={(collapsed, type) => {
+                console.log(collapsed, type);
+              }}
+            >
               <Posts />
             </Sider>
             <Content className="main-content">

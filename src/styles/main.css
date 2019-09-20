@@ -46,6 +46,16 @@
   width: 100%;
   text-align: center;
 }
+
+.ant-list-vertical .ant-list-item {
+  display: block;
+}
+
+.ant-list-vertical .ant-list-item > img {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 .list-link-style {
   color: #1890ff;
   text-decoration: none;
@@ -78,4 +88,33 @@
   color: #fff;
   font-size: 14px;
   background: #001529;
+}
+
+section.ant-layout-has-sider {
+  margin-top: 64px;
+}
+
+.fetch-button {
+  text-align: center;
+  margin: 20px;
+}
+
+@media (max-width: 768px) {
+  .ant-list-vertical .ant-list-item-main {
+    min-width: 100%;
+  }
+
+  .ant-list-vertical .ant-list-item-action > li {
+    padding: 0 10px;
+  }
+
+  .ant-list-item-meta-title {
+    word-break: break-all;
+  }
+
+  .ant-list-vertical .ant-list-item > img {
+    position: relative;
+    margin: 10px auto;
+    width: 100%;
+  }
 }
