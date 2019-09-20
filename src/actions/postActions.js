@@ -11,7 +11,7 @@ const formattedPosts = compose(
 // Fetch Posts
 
 export const fetchPosts = after => dispatch => {
-  let url = 'https://www.reddit.com/r/news/top.json?limit=10';
+  let url = 'https://www.reddit.com/top.json?limit=10';
   if (after) url = `${url}&after=${after}`;
 
   return axios.get(url, { responseType: 'json' }).then(res => {
