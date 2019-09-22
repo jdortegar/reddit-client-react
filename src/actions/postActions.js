@@ -17,7 +17,7 @@ const formattedPosts = compose(
 
 export const fetchPosts = after => dispatch => {
   let url =
-    'http://www.reddit.com/r/pics/search.json?q=kittens&sort=new.json?limit=10';
+    'https://www.reddit.com/r/pics/search.json?q=kittens&sort=new.json?limit=10';
   if (after) url = `${url}&after=${after}`;
 
   return axios
