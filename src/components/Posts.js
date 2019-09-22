@@ -32,7 +32,7 @@ class Posts extends Component {
     dismissAll: false,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchPosts();
   }
 
@@ -53,7 +53,7 @@ class Posts extends Component {
 
     return (
       <div>
-        <div className="demo-infinite-container">
+        <div className="demo-infinite-container" data-test="postsComponent">
           <InfiniteScroll
             initialLoad={false}
             pageStart={0}
@@ -61,7 +61,7 @@ class Posts extends Component {
             hasMore={!this.state.loading}
             useWindow={false}
           >
-            <div class="ant-list sidebar-section ant-list-vertical ant-list-lg ant-list-split">
+            <div className="ant-list sidebar-section ant-list-vertical ant-list-lg ant-list-split">
               <QueueAnim
                 type={['right', 'left']}
                 leaveReverse
@@ -95,7 +95,11 @@ class Posts extends Component {
                     <List.Item.Meta
                       avatar={<Avatar src={avatarImage} />}
                       title={item.author}
-                      description={<Moment fromNow>{item.createdDate}</Moment>}
+                      description={
+                        <Moment fromNow unix>
+                          {item.createdDate}
+                        </Moment>
+                      }
                     />
                     <div
                       className="list-link-style"

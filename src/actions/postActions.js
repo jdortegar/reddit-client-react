@@ -16,22 +16,24 @@ const formattedPosts = compose(
 // Fetch Posts
 
 export const fetchPosts = after => dispatch => {
-  let url = 'https://www.reddit.com/top.json?limit=10';
+  let url =
+    'http://www.reddit.com/r/pics/search.json?q=kittens&sort=new.json?limit=10';
   if (after) url = `${url}&after=${after}`;
 
-  return axios.get(url, { responseType: 'json' }).then(res => {
-    if (res.status !== 200) return [];
+  return axios
+    .get(url, { responseType: 'json' })
+    .then(res => {
+      const payload = {
+        posts: formattedPosts(res),
+        after: path(['data', 'data', 'after'], res),
+      };
 
-    const payload = {
-      posts: formattedPosts(res),
-      after: path(['data', 'data', 'after'], res),
-    };
-
-    return dispatch({
-      type: FETCH_POSTS,
-      payload,
-    });
-  });
+      return dispatch({
+        type: FETCH_POSTS,
+        payload,
+      });
+    })
+    .catch(err => console.log(err));
 };
 
 // Select Post

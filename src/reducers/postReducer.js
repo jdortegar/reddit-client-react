@@ -33,6 +33,7 @@ export default function(state = initialState, action) {
       );
 
       return {
+        ...state,
         posts: newPosts,
         selectedPostId,
       };
@@ -42,10 +43,12 @@ export default function(state = initialState, action) {
       const filterPosts = state.posts.filter(obj => obj.id !== postId);
 
       return {
+        ...state,
         posts: filterPosts,
       };
     case DELETE_ALL_POSTS:
       return {
+        ...state,
         posts: [],
       };
 

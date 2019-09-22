@@ -12,42 +12,39 @@ class PostDetail extends Component {
   render() {
     const { post } = this.props;
 
-    if (Object.keys(post).length === 0)
-      return (
-        <div className="content-section">
-          <h1>Please select a Post</h1>
-        </div>
-      );
-
     return (
-      <div className="content-section">
-        <Card
-          style={{ width: '100%' }}
-          cover={
-            post.thumbnail.indexOf('thumbs') > 1 && (
-              <img alt="thumbnail" src={post.thumbnail} />
-            )
-          }
-          actions={[
-            <div>
-              <Icon type="message" key="message" /> {post.comments}
-            </div>,
-            <Icon
-              type="eye"
-              key="eye"
-              style={{ color: !post.unread ? '#1890ff' : '' }}
-            />,
-            <div onClick={() => this.props.deletePost(post.id)}>
-              <Icon type="delete" key="delete" />,
-            </div>,
-          ]}
-        >
-          <Meta
-            avatar={<Avatar src={avatarImage} />}
-            title={post.author}
-            description={post.title}
-          />
-        </Card>
+      <div className="content-section" data-test="postDetailComponent">
+        {Object.keys(post).length === 0 ? (
+          <h1>Please select a Post</h1>
+        ) : (
+          <Card
+            style={{ width: '100%' }}
+            cover={
+              post.thumbnail.indexOf('thumbs') > 1 && (
+                <img alt="thumbnail" src={post.thumbnail} />
+              )
+            }
+            actions={[
+              <div>
+                <Icon type="message" key="message" /> {post.comments}
+              </div>,
+              <Icon
+                type="eye"
+                key="eye"
+                style={{ color: !post.unread ? '#1890ff' : '' }}
+              />,
+              <div onClick={() => this.props.deletePost(post.id)}>
+                <Icon type="delete" key="delete" />
+              </div>,
+            ]}
+          >
+            <Meta
+              avatar={<Avatar src={avatarImage} />}
+              title={post.author}
+              description={post.title}
+            />
+          </Card>
+        )}
       </div>
     );
   }
