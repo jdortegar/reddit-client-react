@@ -5,6 +5,10 @@ This project was bootstrapped with
 
 https://simpe-reddit-client.herokuapp.com/
 
+## Installation
+
+Please before all, run `npm install`
+
 ## Available Scripts
 
 In the project directory, you can run:
