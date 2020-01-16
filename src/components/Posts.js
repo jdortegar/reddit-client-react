@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import QueueAnim from 'rc-queue-anim';
 import InfiniteScroll from 'react-infinite-scroller';
-import { List, Avatar, Icon, Spin, Button } from 'antd';
+import { List, Avatar, Icon, Spin, Button, Input } from 'antd';
 
 import {
   fetchPosts,
   selectPost,
   deletePost,
-  deleteAllPost,
+  deleteAllPost
 } from '../actions/postActions';
 
 import avatarImage from '../images/avatar.png';
@@ -30,6 +30,7 @@ class Posts extends Component {
     data: [],
     loading: false,
     dismissAll: false,
+    boldValue: 'nomatch'
   };
 
   componentDidMount() {
@@ -48,11 +49,29 @@ class Posts extends Component {
     );
   };
 
+  handleChange = e => {
+    const {
+      target: { value }
+    } = e;
+
+    this.setState({ boldValue: value });
+  };
+
+  changeElement = (boldValue, text) => {
+    const re = new RegExp(`\\b${boldValue}\\b`, 'gi');
+
+    const changedText = text.replace(re, '<strong>' + boldValue + '</strong>');
+    return <div dangerouslySetInnerHTML={{ __html: changedText }} />;
+  };
+
   render() {
     const listData = this.props.entries.posts;
 
+    const { boldValue } = this.state;
+
     return (
       <div>
+        <Input onChange={this.handleChange} placeholder="Input a text" />;
         <div className="demo-infinite-container" data-test="postsComponent">
           <InfiniteScroll
             initialLoad={false}
@@ -84,7 +103,7 @@ class Posts extends Component {
                       />,
                       <div onClick={() => this.props.deletePost(item.id)}>
                         <IconText type="delete" key="list-vertical-delete" />
-                      </div>,
+                      </div>
                     ]}
                     extra={
                       item.thumbnail.indexOf('thumbs') > 1 && (
@@ -105,7 +124,7 @@ class Posts extends Component {
                       className="list-link-style"
                       onClick={() => this.props.selectPost(item.id)}
                     >
-                      {item.title}
+                      {this.changeElement(boldValue, item.title)}
                     </div>
                   </List.Item>
                 ))}
@@ -155,22 +174,19 @@ Posts.propTypes = {
   deleteAllPost: PropTypes.func.isRequired,
   entries: PropTypes.shape({
     posts: PropTypes.array.isRequired,
-    after: PropTypes.string.isRequired,
-  }).isRequired,
+    after: PropTypes.string.isRequired
+  }).isRequired
 };
 
 const mapStateToProps = state => ({
-  entries: state.entries,
+  entries: state.entries
 });
 
 const mapDispatchToProps = {
   fetchPosts,
   selectPost,
   deletePost,
-  deleteAllPost,
+  deleteAllPost
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
